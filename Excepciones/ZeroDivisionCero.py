@@ -16,4 +16,3 @@ class DivisionCalculator:
             raise ValueError("Por favor, ingrese números válidos.")
         except ZeroDivisionError as error:
             raise ZeroDivisionError(error)
-

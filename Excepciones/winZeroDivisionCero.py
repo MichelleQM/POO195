@@ -12,15 +12,15 @@ def Division():
     label = tk.Label(ventana, text="Ingrese dos números para dividir")
     label.pack() 
 
-    tk.Label(ventana, text="Primer numero:").pack()
+    tk.Label(ventana, text="Numerador:").pack()
     entry_num1= tk.Entry(ventana)
     entry_num1.pack()
 
-    tk.Label(ventana, text="Segundo numero:").pack()
+    tk.Label(ventana, text="Denominador:").pack()
     entry_num2 = tk.Entry(ventana)
     entry_num2.pack()
 
-    def handle_division():
+    def division():
         try:
             num1 = float(entry_num1.get())
             num2 = float(entry_num2.get())
@@ -32,9 +32,10 @@ def Division():
         except ZeroDivisionError as error:
             messagebox.showerror("Error", str(error))
 
-    button = tk.Button(ventana, text="Dividir", command=handle_division)
+    button = tk.Button(ventana, text="Dividir", command=division)
     button.pack()
 
     ventana.mainloop()
 
 Division()
+
