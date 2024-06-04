@@ -47,4 +47,5 @@ def paginano(e):
     return 'Revisa tu sintaxis: No encontre nada'
 
 if __name__ == '__main__':
-    app.run(port=3000,debug=True)
+    app.run(port=6000,debug=True)
+    

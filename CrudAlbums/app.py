@@ -8,7 +8,6 @@ app.config['MYSQL_PASSWORD'] = '12345'
 app.config['MYSQL_DB'] = 'dbflask'
 mysql = MySQL(app)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -27,4 +26,5 @@ def paginanotfound(e):
     return 'Revisa tu sintaxis: No encontre nada'
 
 if __name__ == '__main__':
-    app.run(port=3000,debug=True)
+    app.run(port=5000,debug=True)
+
