@@ -9,6 +9,15 @@
 
 <body>
 
+    <!--mensaje con jinja-->
+    {% with msj = get_flashed_messages() %}
+    {% if msj %}
+    {% for mensaje in msj %}
+        <hi>{{mensaje}}</hi>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
     <form action="/guardarAlbum" method="post">
 
         <label>Titulo:</label>
