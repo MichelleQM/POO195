@@ -37,6 +37,13 @@ def guardarAlbum():
         
         flash('Album Guardado correctamente')
         return redirect(url_for('index'))
+    
+@app.route('/edita/<id>r')
+def editar(id):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM albums WHERE idAlbum = %s', (id))
+    albumE = cur.fetchone()
+    return render_template('editar.html', albumE = albumE)
 
 @app.errorhandler(404)
 def paginanotfound(e):
