@@ -13,7 +13,7 @@
     {% with msj = get_flashed_messages() %}
     {% if msj %}
     {% for mensaje in msj %}
-        <hi>{{mensaje}}</hi>
+    <h1>{{ mensaje }}</h1>
     {% endfor %}
     {% endif %}
     {% endwith %}
@@ -23,10 +23,8 @@
         <label>Titulo:</label>
         <input type="text" name="txtTitulo">
 
-
         <label>Artista:</label>
         <input type="text" name="txtArtista">
-
 
         <label>Año:</label>
         <input type="number" name="txtAnio">
@@ -41,10 +39,10 @@
     <table>
         <thead>
             <tr>
-                <td>ID: </td>
-                <td>Album: </td>
-                <td>Artista: </td>
-                <td>Año:</td>
+                <td>ID</td>
+                <td>Album</td>
+                <td>Artista</td>
+                <td>Año</td>
                 <td>Operaciones</td>
             </tr>
         </thead>
@@ -52,18 +50,28 @@
         <tbody>
             {% for album in albums %}
             <tr>
-                <td>{{album.0}}</td>
-                <td>{{album.1}}</td>
-                <td>{{album.2}}</td>
-                <td>{{album.3}}</td>
+                <td>{{ album.id }}</td>
+                <td>{{ album.titulo }}</td>
+                <td>{{ album.artista }}</td>
+                <td>{{ album.anio }}</td>
                 <td>
-                <td><a href="/editar/{{album.0}}">Editar</a></td>
-                <td><a href="#">Eliminar</a></td>
+                    <a href="/editar/{{ album.id }}">Editar</a>
+                    <a href="/eliminar/{{ album.id }}">Eliminar</a>
+                    <button onclick="confirmarEliminacion('{{ album.id }}')">Eliminar Álbum</button>
+                </td>
             </tr>
-            {%endfor%}
+            {% endfor %}
         </tbody>
     </table>
 
+    <script>
+        function confirmarEliminacion(id) {
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar este álbum?")
+        }
+    </script>
 </body>
+
+</html>
+
 
 </html>
