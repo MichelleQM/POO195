@@ -1,77 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'plantilla.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Albums</title>
-</head>
+{% block body %}
+<!--mensaje con jinja-->
+{% with msj = get_flashed_messages() %}
+{% if msj %}
+{% for mensaje in msj %}
+<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 
-<body>
+<h1 class="text-center mt-5 mb-5 display-4 text-danger">Gestion de Albums</h1>
 
-    <!--mensaje con jinja-->
-    {% with msj = get_flashed_messages() %}
-    {% if msj %}
-    {% for mensaje in msj %}
-    <h1>{{ mensaje }}</h1>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+<div class="row">
+    <div class="col-md-5">
+        <form action="/guardarAlbum" method="post">
 
-    <form action="/guardarAlbum" method="post">
+            <label>Titulo:</label>
+            <input type="text" name="txtTitulo">
 
-        <label>Titulo:</label>
-        <input type="text" name="txtTitulo">
+            <label>Artista:</label>
+            <input type="text" name="txtArtista">
 
-        <label>Artista:</label>
-        <input type="text" name="txtArtista">
+            <label>Año:</label>
+            <input type="number" name="txtAnio">
 
-        <label>Año:</label>
-        <input type="number" name="txtAnio">
+            <button type="submit">Guardar Album</button>
 
-        <button type="submit">Guardar Album</button>
+        </form>
+    </div>
+    <div class="col-md-7"> <!-- Corrected from clas="col-md-7" to class="col-md-7" -->
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Album</td>
+                    <td>Artista</td>
+                    <td>Año</td>
+                    <td>Operaciones</td>
+                </tr>
+            </thead>
 
-    </form>
-    <br>
-    <br>
-    <br>
-
-    <table>
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Album</td>
-                <td>Artista</td>
-                <td>Año</td>
-                <td>Operaciones</td>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for album in albums %}
-            <tr>
-                <td>{{ album.id }}</td>
-                <td>{{ album.titulo }}</td>
-                <td>{{ album.artista }}</td>
-                <td>{{ album.anio }}</td>
-                <td>
-                    <a href="/editar/{{ album.id }}">Editar</a>
-                    <a href="/eliminar/{{ album.id }}">Eliminar</a>
-                    <button onclick="confirmarEliminacion('{{ album.id }}')">Eliminar Álbum</button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <script>
-        function confirmarEliminacion(id) {
-            var confirmacion = confirm("¿Estás seguro de que deseas eliminar este álbum?")
-        }
-    </script>
-</body>
-
-</html>
-
-
-</html>
+            <tbody>
+                {% for album in albums %}
+                <tr>
+                    <td>{{ album.id }}</td>
+                    <td>{{ album.titulo }}</td>
+                    <td>{{ album.artista }}</td>
+                    <td>{{ album.anio }}</td>
+                    <td>
+                        <a href="/editar/{{ album.id }}">Editar</a>
+                        <a href="/eliminar/{{ album.id }}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

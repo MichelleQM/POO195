@@ -45,7 +45,7 @@ def editar(id):
     albumE = cur.fetchone()
     return render_template('editar.html', albumE = albumE)
 
-@app.route('/ActualizarrAlbum/<id>', methods=['POST'])
+@app.route('/ActualizarAlbum/<id>', methods=['POST'])
 def ActualizarAlbum(id):
     if request.method == 'POST':
         # Tomamos los datos que vienen por POST
@@ -64,7 +64,7 @@ def ActualizarAlbum(id):
 @app.route('/eliminar/<id>')
 def eliminar(id):
     cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM albums WHERE idAlbum = %s'(id))
+    cur.execute('DELETE FROM albums WHERE idAlbum = %s'(id)) 
     mysql.connection.commit()
     flash('Album eliminado correctamente')
     return redirect(url_for('index'))
