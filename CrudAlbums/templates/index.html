@@ -1,64 +1,74 @@
-{% extends 'plantilla.html' %}
+{% extends "plantilla.html" %}
 
 {% block body %}
-<!--mensaje con jinja-->
+
 {% with msj = get_flashed_messages() %}
 {% if msj %}
 {% for mensaje in msj %}
-<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
-    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ mensaje }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+
 {% endfor %}
 {% endif %}
 {% endwith %}
 
-<h1 class="text-center mt-5 mb-5 display-4 text-danger">Gestion de Albums</h1>
-
+<h1 class="text-center mt-5 mb-5 display-3 text-alert">Gestion albums</h1>
 <div class="row">
     <div class="col-md-5">
-        <form action="/guardarAlbum" method="post">
+        <div class="container">
+            <form action="/guardarAlbum" method="post">
 
-            <label>Titulo:</label>
-            <input type="text" name="txtTitulo">
+                <div class="mb-3">
 
-            <label>Artista:</label>
-            <input type="text" name="txtArtista">
+                    <label for="titulo">Título:</label>
+                    <input type="text" name="txtTitulo" class="form-control"><br><br>
+                </div>
+                <div class="mb-3">
 
-            <label>Año:</label>
-            <input type="number" name="txtAnio">
+                    <label for="artista">Artista:</label>
+                    <input type="text" name="txtArtista" class="form-control"><br><br>
+                </div>
+                <div class="mb-3">
 
-            <button type="submit">Guardar Album</button>
+                    <label for="año">Año:</label>
+                    <input type="number" name="txtAnio" class="form-control"><br><br>
+                </div>
 
-        </form>
+                <button type="submit" class="btn btn-outline-success mt-2 mb-5">Guardar Album</button>
+            </form>
+        </div>
     </div>
-    <div class="col-md-7"> <!-- Corrected from clas="col-md-7" to class="col-md-7" -->
-        <table>
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Album</td>
-                    <td>Artista</td>
-                    <td>Año</td>
-                    <td>Operaciones</td>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for album in albums %}
-                <tr>
-                    <td>{{ album.id }}</td>
-                    <td>{{ album.titulo }}</td>
-                    <td>{{ album.artista }}</td>
-                    <td>{{ album.anio }}</td>
-                    <td>
-                        <a href="/editar/{{ album.id }}">Editar</a>
-                        <a href="/eliminar/{{ album.id }}">Eliminar</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="col-md-7">
+        <div class="container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID:</th>
+                        <th scope="col">Album:</th>
+                        <th scope="col">Artista:</th>
+                        <th scope="col">Año:</th>
+                        <th scope="col">Operaciones:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for album in albums %}
+                    <tr>
+                        <th scope="row">{{ album.0 }}</th>
+                        <td>{{ album.1 }}</td>
+                        <td>{{ album.2 }}</td>
+                        <td>{{ album.3 }}</td>
+                        <td><a href="/editar/{{ album.0 }}" class="btn btn-secondary">Editar</a></td>
+                        <td><a href="#" onclick="confirmarEliminacion('{{ album.0 }}')"
+                                class="btn btn-warning">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-{% endblock %}
+
+{%endblock%}
